@@ -47,7 +47,7 @@ buildTags="jsoniter"
 
 .PHONY: default test
 
-default: test
+default: run-version
 
 all: test
 
@@ -58,7 +58,33 @@ test:
 	go build -v -tags ${buildTags} -ldflags ${ldFlagsDebug} -o ${BASEDIR}/build/bin/test ${BASEDIR}/test/
 	@echo "Done test built remain gdb info"
 
-run:
+run-version: test
 	${BASEDIR}/build/bin/test
 
-re-run: test run
+run: app
+	${BASEDIR}/build/bin/app start
+app:
+	go build -v -tags ${buildTags} -ldflags ${ldFlagsDebug} -o ${BASEDIR}/build/bin/app  ${BASEDIR}
+	@echo "Done app built remain gdb info"
+app-darwin:
+	export CGO_ENABLED=0 && export GOOS=darwin && export GOARCH=amd64 && \
+	go build -v -tags ${buildTags} -ldflags ${ldFlagsRelease} -o ${BASEDIR}/build/bin/app-darwin ${BASEDIR}
+	@echo "Done app built for darwin, remain gdb info "
+app-linux:
+	export CGO_ENABLED=0 && export GOOS=linux && export GOARCH=amd64 && \
+	go build -v -tags ${buildTags} -ldflags ${ldFlagsRelease} -o ${BASEDIR}/build/bin/app-linux ${BASEDIR}
+	@echo "Done app built for linux"
+release:
+	go build -v -tags ${buildTags} -ldflags ${ldFlagsRelease} -o ${BASEDIR}/dist/app ${BASEDIR}
+	@echo "Done app release built"
+release-vendor:
+	go build -v -mod=vendor -tags ${buildTags} -ldflags ${ldFlagsRelease} -o ${BASEDIR}/dist/app ${BASEDIR}
+	@echo "Done app release built"
+version:
+	${BASEDIR}/build/bin/app version
+upx: app-darwin app-linux
+	upx ${BASEDIR}/build/bin/app-darwin
+	upx ${BASEDIR}/build/bin/app-linux
+	ls -lhr ${BASEDIR}/build/bin/*
+wrk:
+	bash ${BASEDIR}/tool/wrk.sh
