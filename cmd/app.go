@@ -17,6 +17,8 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/spf13/cobra"
 	"github.com/xwi88/kit4go/datetime"
+
+	"github.com/xwi88/go-tf/api"
 )
 
 var (
@@ -63,6 +65,9 @@ var startCMD = &cobra.Command{
 			fmt.Println("🥇 First handler")
 			return c.Next()
 		})
+
+		tf := app.Group("/tf")
+		tf.Get("/version", api.TFVersionHandler)
 
 		// Match all routes starting with /api
 		// app.Use("/api", func(c *fiber.Ctx) error {

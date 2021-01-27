@@ -88,3 +88,5 @@ upx: app-darwin app-linux
 	ls -lhr ${BASEDIR}/build/bin/*
 wrk:
 	bash ${BASEDIR}/tool/wrk.sh
+wrk2:
+	bash ${BASEDIR}/tool/wrk_tf_version.sh
