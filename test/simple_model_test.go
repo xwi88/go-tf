@@ -5,12 +5,14 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"testing"
 
 	tf "github.com/tensorflow/tensorflow/tensorflow/go"
 )
 
-func main() {
-	modelFile := "../models/saved_model_half_plus_two_cpu.pb"
+func TestSimpleModel(t *testing.T) {
+	modelFile := "../models/saved_model.pb"
+	// modelFile := "../models/saved_model_half_plus_two_cpu.pb"
 	// modelFile := "../models/tensorflow_inception_graph.pb"
 	if filesExist(modelFile) != nil {
 		log.Fatalf("modelFile not exist")
@@ -36,7 +38,8 @@ func main() {
 	log.Printf("session create")
 	defer session.Close()
 
-	inputSlice := []float32{1.0, 2.0, 5.0}
+	// inputSlice := []float32{1.0, 2.0, 5.0}
+	inputSlice := [3][2][2][]float32{}
 	tensor, err := tf.NewTensor(inputSlice)
 	if err != nil {
 		log.Fatal(err)

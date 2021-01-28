@@ -68,6 +68,7 @@ var startCMD = &cobra.Command{
 
 		tf := app.Group("/tf")
 		tf.Get("/version", api.TFVersionHandler)
+		tf.Get("/predict", api.TFPredictHandler)
 
 		// Match all routes starting with /api
 		// app.Use("/api", func(c *fiber.Ctx) error {

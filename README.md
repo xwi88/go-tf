@@ -1,5 +1,10 @@
 # QuickStart
 
+## Sites
+
+- [tensorflow](https://github.com/tensorflow/tensorflow)
+- [tensorflow-serving](https://github.com/tensorflow/serving)
+
 ## Go API
 
 >https://www.tensorflow.org/install/lang_go
@@ -43,4 +48,22 @@ require (
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/tensorflow/tensorflow v2.1.3+incompatible
 )
+```
+
+## Test
+
+- HTTP: `https://github.com/giltene/wrk2`
+- Bench stats: `go get golang.org/x/perf/cmd/benchstat`
+
+## Tool
+
+```bash
+# CenotOS Install
+Install GetPageSpeed repository:
+# yum install https://extras.getpagespeed.com/release-el7-latest.rpm
+Install wrk rpm package:
+# yum install wrk
+
+# MAC Install
+brew install wrk
 ```

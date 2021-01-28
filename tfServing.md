@@ -20,3 +20,7 @@ curl -d '{"instances": [1.0, 2.0, 5.0]}' \
 
 # Returns => { "predictions": [2.5, 3.0, 4.5] }
 ```
+
+## docs
+
+- [example_inception_inference](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/go/example_inception_inference_test.go)

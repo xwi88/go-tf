@@ -47,7 +47,7 @@ buildTags="jsoniter"
 
 .PHONY: default test
 
-default: run-version
+default: version
 
 all: test
 
@@ -55,11 +55,7 @@ clean:
 	rm -r build/bin
 
 test:
-	go build -v -tags ${buildTags} -ldflags ${ldFlagsDebug} -o ${BASEDIR}/build/bin/test ${BASEDIR}/test/
-	@echo "Done test built remain gdb info"
-
-run-version: test
-	${BASEDIR}/build/bin/test
+	go test -v ${BASEDIR}/test/tf_version_test.go
 
 run: app
 	${BASEDIR}/build/bin/app start
@@ -87,8 +83,15 @@ upx: app-darwin app-linux
 	upx ${BASEDIR}/build/bin/app-linux
 	ls -lhr ${BASEDIR}/build/bin/*
 wrk:
-	bash ${BASEDIR}/tool/wrk.sh
+	bash ${BASEDIR}/tool/wrk_api.sh
 wrk2:
-	bash ${BASEDIR}/tool/wrk_tf_version.sh
+	bash ${BASEDIR}/tool/wrk_tf_predict.sh
 wrk3:
+	bash ${BASEDIR}/tool/wrk_tf_version.sh
+wrk4:
 	bash ${BASEDIR}/tool/wrk_tf_serving.sh
+
+bench:
+	go test -v -bench=. -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=Benchmark_SimpleModel2 test/simple_model2_test.go | tee ${BASEDIR}/build/old.txt
+stats:
+	benchstat ${BASEDIR}/build/old.txt
