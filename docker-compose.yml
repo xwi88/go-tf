@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  tensorflow-serving:
+    build: .
+    environment:
+      TZ: "Asia/Shanghai"
+      MODEL_NAME: half_plus_two
+    container_name: tensorflow-serving
+    image: tensorflow/serving:latest
+    ports:
+      - "8501:8501"
+      - "8500:8500"
+    restart: 'no' # 'no'|'on-failure'|'always'|'unless-stopped'
+    volumes:
+      - $PWD/testdata/saved_model_half_plus_two_cpu:/models/half_plus_two

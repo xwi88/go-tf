@@ -90,3 +90,5 @@ wrk:
 	bash ${BASEDIR}/tool/wrk.sh
 wrk2:
 	bash ${BASEDIR}/tool/wrk_tf_version.sh
+wrk3:
+	bash ${BASEDIR}/tool/wrk_tf_serving.sh

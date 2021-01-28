@@ -17,8 +17,11 @@
 # Dependency directories (remove the comment below to include it)
 vendor/
 
+testdata/
+!testdata/saved_model_half_plus_two_cpu
+
 build/
-model/
+models/
 tmp/
 files/
 *.gz
