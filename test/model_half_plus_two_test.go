@@ -52,21 +52,25 @@ func runLoadModelHalfPlusTwo() {
 }
 
 func TestRunLoadModelHalfPlusTwo(t *testing.T) {
+	loadSavedModelHalfPlusTwoCPU()
 	runLoadModelHalfPlusTwo()
 }
 
 func Benchmark_RunLoadModelHalfPlusTwo(b *testing.B) {
+	loadSavedModelHalfPlusTwoCPU()
+	n := b.N
+	for i := 0; i < n; i++ {
+		runLoadModelHalfPlusTwo()
+	}
+}
+
+func loadSavedModelHalfPlusTwoCPU() {
 	var err error
 	if sm == nil || sm.Graph == nil || sm.Session == nil {
 		sm, err = tf.LoadSavedModel("../testdata/saved_model_half_plus_two_cpu/000001", []string{"serve"}, nil)
 		if err != nil {
 			log.Fatalf("tf.LoadSavedModel err: %v", err)
 		}
-	}
-
-	n := b.N
-	for i := 0; i < n; i++ {
-		runLoadModelHalfPlusTwo()
 	}
 }
 
