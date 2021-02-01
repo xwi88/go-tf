@@ -95,3 +95,8 @@ bench:
 	go test -v -bench=. -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=Benchmark_SimpleModel2 test/simple_model2_test.go | tee ${BASEDIR}/build/old.txt
 stats:
 	benchstat ${BASEDIR}/build/old.txt
+
+bench2:
+	go test -v -bench=. -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=Benchmark_HalfPlusTwo test/half_plus_two_test.go | tee ${BASEDIR}/build/old.txt
+stats2:
+	benchstat ${BASEDIR}/build/old.txt

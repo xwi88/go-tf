@@ -28,6 +28,7 @@ func runSimpleModel() {
 	// Define the operation node that accepts A & x as inputs
 	product := op.MatMul(root, A, x)
 
+
 	// Every time we passed a `Scope` to an operation, we placed that
 	// operation **under** that scope.
 	// As you can see, we have an empty scope (created with NewScope): the empty scope
