@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
 	"testing"
@@ -11,7 +12,7 @@ import (
 
 var sm *tf.SavedModel
 
-func runLoadModelHalfPlusTwo() {
+func runLoadModelHalfPlusTwo(print bool) {
 
 	// log.Printf("tf.LoadSavedModel :%+v", sm)
 	// log.Printf("tf.LoadSavedModel graph :%+v", sm.Graph)
@@ -43,30 +44,33 @@ func runLoadModelHalfPlusTwo() {
 		log.Fatalf("tf.LoadSavedModel err: %+v", err)
 	}
 
-	_ = results
-	// for _, result := range results {
-	// 	fmt.Printf(" input: %+v\n", inputS)
-	// 	fmt.Printf("output: %+v\n", result.Value().([]float32))
-	// }
+	// _ = results
+	if print {
+		for _, result := range results {
+			fmt.Printf(" input: %+v\n", inputS)
+			fmt.Printf("output: %+v\n", result.Value().([]float32))
+		}
+	}
 
 }
 
-func TestRunLoadModelHalfPlusTwo(t *testing.T) {
+func Test_RunLoadModelHalfPlusTwo(t *testing.T) {
 	loadSavedModelHalfPlusTwoCPU()
-	runLoadModelHalfPlusTwo()
+	runLoadModelHalfPlusTwo(true)
 }
 
 func Benchmark_RunLoadModelHalfPlusTwo(b *testing.B) {
 	loadSavedModelHalfPlusTwoCPU()
 	n := b.N
 	for i := 0; i < n; i++ {
-		runLoadModelHalfPlusTwo()
+		runLoadModelHalfPlusTwo(false)
 	}
 }
 
 func loadSavedModelHalfPlusTwoCPU() {
 	var err error
 	if sm == nil || sm.Graph == nil || sm.Session == nil {
+		// sm, err = tf.LoadSavedModel("../testdata/saved_model_half_plus_two_cpu/000001", []string{"serve"}, nil)
 		sm, err = tf.LoadSavedModel("../testdata/saved_model_half_plus_two_cpu/000001", []string{"serve"}, nil)
 		if err != nil {
 			log.Fatalf("tf.LoadSavedModel err: %v", err)

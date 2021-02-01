@@ -92,16 +92,18 @@ wrk4:
 	bash ${BASEDIR}/tool/wrk_tf_serving.sh
 
 bench:
-	go test -v -bench=. -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=Benchmark_SimpleModel2 test/simple_model2_test.go | tee ${BASEDIR}/build/old.txt
+	go test -v  -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=Benchmark_SimpleModel2 test/simple_model2_test.go | tee ${BASEDIR}/build/old.txt
 stats:
 	benchstat ${BASEDIR}/build/old.txt
 
 bench2:
-	go test -v -bench=. -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=Benchmark_HalfPlusTwo test/half_plus_two_test.go | tee ${BASEDIR}/build/old.txt
+	go test -v -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=none -bench=Benchmark_HalfPlusTwo test/half_plus_two_test.go | tee ${BASEDIR}/build/old.txt
 stats2:
 	benchstat ${BASEDIR}/build/old.txt
 
+test3:
+	go test -v -cpu=1,2,4,8 -count=4 -run=Test_RunLoadModelHalfPlusTwo test/model_half_plus_two_test.go | tee ${BASEDIR}/build/old.txt
 bench3:
-	go test -v -bench=. -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=Benchmark_RunLoadModelHalfPlusTwo test/model_half_plus_two_test.go | tee ${BASEDIR}/build/old.txt
+	go test -v -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=none -bench=Benchmark_RunLoadModelHalfPlusTwo test/model_half_plus_two_test.go | tee ${BASEDIR}/build/old.txt
 stats3:
 	benchstat ${BASEDIR}/build/old.txt
