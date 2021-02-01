@@ -24,3 +24,4 @@ curl -d '{"instances": [1.0, 2.0, 5.0]}' \
 ## docs
 
 - [example_inception_inference](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/go/example_inception_inference_test.go)
+- [saved_model_half_plus_two ref](https://github.com/tensorflow/serving/blob/master/tensorflow_serving/servables/tensorflow/testdata/saved_model_half_plus_two.py)

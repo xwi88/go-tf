@@ -38,6 +38,8 @@ make run
 - [version incompatible ref](https://github.com/tensorflow/tensorflow/issues/41808)
     - https://github.com/photoprism/photoprism/pull/775
 - [hack fixed, only ref](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/go/README.md)
+- [saved_model_half_plus_two](https://github.com/tensorflow/serving/blob/master/tensorflow_serving/servables/tensorflow/testdata/saved_model_half_plus_two.py)
+    - input, output, tags
 
 ## Module
 
