@@ -100,3 +100,8 @@ bench2:
 	go test -v -bench=. -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=Benchmark_HalfPlusTwo test/half_plus_two_test.go | tee ${BASEDIR}/build/old.txt
 stats2:
 	benchstat ${BASEDIR}/build/old.txt
+
+bench3:
+	go test -v -bench=. -cpu=1,2,4,8 -count=4 -benchtime=5s -benchmem -run=Benchmark_RunLoadModelHalfPlusTwo test/model_half_plus_two_test.go | tee ${BASEDIR}/build/old.txt
+stats3:
+	benchstat ${BASEDIR}/build/old.txt

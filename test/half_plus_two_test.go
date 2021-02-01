@@ -27,8 +27,10 @@ func runHalfPlusTwo() {
 	// Define the operation node that accepts  x as inputs
 	y := op.Const(root.SubScope("input"), 2.0)
 	z := op.Const(root.SubScope("input"), 2.0)
-	product := op.Div(root, x, y)
-	product = op.Add(root, product, z)
+	// product := op.Div(root, x, y)
+	// product = op.Add(root, product, z)
+
+	product := op.Add(root, op.Div(root, x, y), z)
 
 	// Every time we passed a `Scope` to an operation, we placed that
 	// operation **under** that scope.
@@ -76,8 +78,8 @@ func runHalfPlusTwo() {
 	}
 	_ = results
 	// for _, result := range results {
-		// fmt.Printf(" input: %+v\n", inputS)
-		// fmt.Printf("output: %+v\n", result.Value().([]float64))
+	// 	log.Printf(" input: %+v\n", inputS)
+	// 	log.Printf("output: %+v\n", result.Value().([]float64))
 	// }
 }
 
