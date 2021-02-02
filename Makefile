@@ -87,9 +87,9 @@ upx: app-darwin app-linux
 wrk:
 	bash ${BASEDIR}/tool/wrk_api.sh
 wrk2:
-	bash ${BASEDIR}/tool/wrk_tf_predict.sh
-wrk3:
 	bash ${BASEDIR}/tool/wrk_tf_version.sh
+wrk3:
+	bash ${BASEDIR}/tool/wrk_tf_predict.sh
 wrk4:
 	bash ${BASEDIR}/tool/wrk_tf_serving.sh
 

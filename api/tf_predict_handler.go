@@ -31,7 +31,7 @@ func predictDeal(ctx *fiber.Ctx) ([]*tf.Tensor, error) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Printf("body:%+v", predReqData)
+	// log.Printf("body:%+v", predReqData)
 
 	return predict.Predict("x", "y", predReqData.Inputs)
 }

@@ -73,10 +73,15 @@ var startCMD = &cobra.Command{
 		}))
 
 		// Match any route
-		app.Use(func(c *fiber.Ctx) error {
+		apiGroup := app.Group("/api", func(c *fiber.Ctx) error {
 			fmt.Println("🥇 First handler")
 			return c.Next()
 		})
+		// Match any route
+		// app.Use(func(c *fiber.Ctx) error {
+		// 	fmt.Println("🥇 First handler")
+		// 	return c.Next()
+		// })
 
 		tf := app.Group("/tf")
 		tf.Get("/version", api.TFVersionHandler)
@@ -90,7 +95,7 @@ var startCMD = &cobra.Command{
 		// })
 
 		// GET /api/register
-		app.Get("/api/list", func(c *fiber.Ctx) error {
+		apiGroup.Get("/api/list", func(c *fiber.Ctx) error {
 			fmt.Println("🥉 Last handler")
 			return c.SendString("Hello, World 👋!")
 		})
