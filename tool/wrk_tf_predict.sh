@@ -2,5 +2,5 @@
 
 # brew install wrk for MacOS
 
-#wrk -t12 -c200 -d30s http://127.0.0.1:6666/tf/predict
-wrk -t12 -c200 -d60s http://127.0.0.1:6666/tf/predict
+readonly CURRENT_PATH=$(cd $(dirname "$0"); pwd)
+wrk -t6 -c10 -d30s -s ${CURRENT_PATH}/tf_predict.lua http://localhost:6666/tf/predict

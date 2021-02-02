@@ -70,8 +70,8 @@ func Benchmark_RunLoadModelHalfPlusTwo(b *testing.B) {
 func loadSavedModelHalfPlusTwoCPU() {
 	var err error
 	if sm == nil || sm.Graph == nil || sm.Session == nil {
-		// sm, err = tf.LoadSavedModel("../testdata/saved_model_half_plus_two_cpu/000001", []string{"serve"}, nil)
 		sm, err = tf.LoadSavedModel("../testdata/saved_model_half_plus_two_cpu/000001", []string{"serve"}, nil)
+		// sm, err = tf.LoadSavedModel("../testdata/saved_model_half_plus_two_cpu", []string{"serve"}, nil)
 		if err != nil {
 			log.Fatalf("tf.LoadSavedModel err: %v", err)
 		}

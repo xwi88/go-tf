@@ -19,6 +19,7 @@ import (
 	"github.com/xwi88/kit4go/datetime"
 
 	"github.com/xwi88/go-tf/api"
+	"github.com/xwi88/go-tf/predict"
 )
 
 var (
@@ -40,6 +41,17 @@ var startCMD = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		pid = syscall.Getpid()
 		log.Printf("[app] Run with pid: %v, at: %v", pid, datetime.GetNowWithZone(nil))
+
+		// Load model
+		err := predict.LoadModel("testdata/saved_model_half_plus_two_cpu/default", []string{"serve"}, nil, predict.DefaultModelName)
+		if err == nil {
+			log.Printf("load model success: %v", err)
+		} else {
+			err = predict.LoadModel("../testdata/saved_model_half_plus_two_cpu/default", []string{"serve"}, nil, predict.DefaultModelName)
+			if err != nil {
+				log.Fatalf("load model err: %v", err)
+			}
+		}
 
 		app := fiber.New(fiber.Config{
 			Prefork:               false,
@@ -69,6 +81,7 @@ var startCMD = &cobra.Command{
 		tf := app.Group("/tf")
 		tf.Get("/version", api.TFVersionHandler)
 		tf.Get("/predict", api.TFPredictHandler)
+		tf.Post("/predict", api.TFPredictHandler)
 
 		// Match all routes starting with /api
 		// app.Use("/api", func(c *fiber.Ctx) error {

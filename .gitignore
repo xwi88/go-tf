@@ -19,6 +19,7 @@ vendor/
 
 testdata
 !testdata/saved_model_half_plus_two_cpu
+!testdata/saved_model_half_plus_two_cpu/default
 
 build/
 models/

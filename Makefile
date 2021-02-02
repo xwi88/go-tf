@@ -52,7 +52,7 @@ default: version
 all: test
 
 clean:
-	rm -r build/bin
+	rm -r build/bin && rm -r build/testdata
 
 test:
 	go test -v ${BASEDIR}/test/tf_version_test.go
@@ -60,6 +60,8 @@ test:
 run: app
 	${BASEDIR}/build/bin/app start
 app:
+	mkdir -p ${BASEDIR}/build/testdata/saved_model_half_plus_two_cpu && \
+	cp -rf ${BASEDIR}/testdata/saved_model_half_plus_two_cpu/default ${BASEDIR}/build/testdata/saved_model_half_plus_two_cpu && \
 	go build -v -tags ${buildTags} -ldflags ${ldFlagsDebug} -o ${BASEDIR}/build/bin/app  ${BASEDIR}
 	@echo "Done app built remain gdb info"
 app-darwin:
