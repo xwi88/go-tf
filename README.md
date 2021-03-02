@@ -11,14 +11,15 @@
 
 ## C lib install
 
->https://www.tensorflow.org/install/lang_c#download
+- [download](https://www.tensorflow.org/install/lang_c#download)
+- [current support:libtensorflow-cpu-darwin-x86_64-2.3.0](https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-darwin-x86_64-2.3.0.tar.gz)
 
 ```bash
 # Standard Install
 sudo tar -C /usr/local -xzf (downloaded file)
 
 # Non sys dir install
-tar -C ~/c_lib -xzf libtensorflow-cpu-darwin-x86_64-2.3.0.tar.gz
+tar -C ~/mydir -xzf libtensorflow-cpu-darwin-x86_64-2.3.0.tar.gz
 
 #ldconfig
 export LIBRARY_PATH=$LIBRARY_PATH:~/mydir/lib
